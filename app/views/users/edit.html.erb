@@ -1,0 +1,43 @@
+<main>
+  <p id="notice"><%= flash[:notice] %></p>
+  <div class='container'>
+    <div class='row'>
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <h2>User info</h2>
+        <%= form_with model:@user, local: true do |f| %>
+          <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <h3><%= pluralize(@user.errors.count, "error") %> prohibited this obj from being saved:</h3>
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+            
+          <div class="form-group">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :image %><br />
+            <%= f.attachment_field :profile_image, class: "form-control-file" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :introduction %><br />
+            <%= f.text_area :introduction, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.submit "Update User", class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

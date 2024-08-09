@@ -1,0 +1,41 @@
+<main>
+  <p id="notice"><%= flash[:notice] %></p>
+  <div class='container px-5 px-sm-0'>
+    <div class='row'>
+      <div class='col-md-3'>
+        <%= render 'users/info', user: @user, book: @bookn %>
+      </div>
+      
+      <div class='col-md-8 offset-md-1'>
+        <h2>Book detail</h2>
+        <!-- 投稿した書籍一覧表示を作成しましょう。 -->
+        <table class='table'>
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to user_path(@user.id) do %>
+                  <%= attachment_image_tag @user, :profile_image, format:'jpeg', fallback:"default-image.jpg", size: "80x80" %><br />
+                  <%= @user.name %>
+                <% end %>
+              </td>
+              
+              <td>
+                <%= link_to  book_path(@book.id) do %>
+                  <%= @book.title %>
+                <% end %>
+              </td>
+              
+              <td><%= @book.body %></td>
+              
+              <% if @user.id == current_user.id %>
+              <td><%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
+              
+              <td><%= link_to 'Destroy', book_path(@book.id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
